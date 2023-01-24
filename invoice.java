@@ -1,8 +1,15 @@
 package invoicingSystem;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+
 
 public class invoice {
 	String firstName;
@@ -51,6 +58,7 @@ public class invoice {
 		
 		item item1 = new item();
 		char choice;
+		
 		do   
         {  
             // read input values  
@@ -70,17 +78,62 @@ public class invoice {
 
             
          
-            shop1.addItem();   
+            shop1.itemOne.add(item1);
             // ask for continue shopping?  
             System.out.print("Do You Want To Add More Items? \nPress Y if yes, and N for No.");  
             //reads a character Y or N  
             choice = sc.next().charAt(0);  
             //read remaining characters, don't store (no use)  
-            sc.next();  
+            sc.next();
+            
         }   
 		while (choice == 'y' || choice == 'Y');  
 		
-		}
+		
+	
+	try{
+	       FileOutputStream file = new FileOutputStream("shop.txt");
+	       ObjectOutputStream out = new ObjectOutputStream(file);
+	       out.writeObject(shop1);
+	       out.close();
+	       file.close();
+	       System.out.println("Serialized and saved");
+	   }catch (Exception e){
+	     e.printStackTrace();
+	   }
+	//--------------------------------------------------------
+	   
+	   
+	   
+	    // Deserialization
+	    try
+	    {
+	        // Reading the object from a file
+	        FileInputStream file = new FileInputStream("shop.txt");
+	        ObjectInputStream in = new ObjectInputStream(file);
+	        // Method for deserialization of object
+	        invoice object1 = (invoice) in.readObject();
+	        in.close();
+	        file.close();
+	        System.out.println("\nObject has been Deserialized ");
+	        System.out.println("Pateint First Name: " + object1.firstName);
+	        System.out.println("Pateint Middle Name: " + object1.middleName);
+	        System.out.println("Pateint Last Name: " + object1.lastName);
+	        System.out.println("Patient Phone Number: " + object1.phoneNumber);
+
+	    }
+	    catch(IOException ex)
+	    {
+	        System.out.println("IOException is caught");
+	    }
+	    catch(ClassNotFoundException ex)
+	    {
+	        System.out.println("ClassNotFoundException is caught");
+	    }
+	
+	
+	}
+	
 
 }
 
