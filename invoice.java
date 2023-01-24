@@ -5,13 +5,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 
-public class invoice {
+public class invoice implements Serializable{
 	String firstName;
 	String middleName;
 	String lastName;
@@ -54,15 +55,16 @@ public class invoice {
 		System.out.println("Enter the Customer Last Name: ");
 		invoice1.lastName = sc.next();
 		System.out.println("Enter the Customer phone Number: ");
-		invoice1.lastName = sc.next();
+		invoice1.phoneNumber = sc.nextInt();
 		
-		item item1 = new item();
+		
 		char choice;
 		
 		do   
         {  
-            // read input values  
-            System.out.println("Enter Product Details: ");  
+			item item1 = new item();
+ 
+            System.out.println("=============== Enter Product Details ===============");  
             System.out.print("Item Id: ");  
             item1.setItemId(sc.nextInt());
             
@@ -77,14 +79,12 @@ public class invoice {
             item1.setQtyAmountPerPrice(sc.nextInt()); 
 
             
-         
-            shop1.itemOne.add(item1);
-            // ask for continue shopping?  
-            System.out.print("Do You Want To Add More Items? \nPress Y if yes, and N for No.");  
-            //reads a character Y or N  
+       
+            System.out.print("\nDo You Want To Add More Items? \nPress Y if yes, and N for No: ");  
+
             choice = sc.next().charAt(0);  
-            //read remaining characters, don't store (no use)  
-            sc.next();
+
+
             
         }   
 		while (choice == 'y' || choice == 'Y');  
@@ -99,37 +99,38 @@ public class invoice {
 	       file.close();
 	       System.out.println("Serialized and saved");
 	   }catch (Exception e){
+		   System.out.println("Error: Cannot be Saved!");
 	     e.printStackTrace();
 	   }
 	//--------------------------------------------------------
 	   
 	   
-	   
-	    // Deserialization
-	    try
-	    {
-	        // Reading the object from a file
-	        FileInputStream file = new FileInputStream("shop.txt");
-	        ObjectInputStream in = new ObjectInputStream(file);
-	        // Method for deserialization of object
-	        invoice object1 = (invoice) in.readObject();
-	        in.close();
-	        file.close();
-	        System.out.println("\nObject has been Deserialized ");
-	        System.out.println("Pateint First Name: " + object1.firstName);
-	        System.out.println("Pateint Middle Name: " + object1.middleName);
-	        System.out.println("Pateint Last Name: " + object1.lastName);
-	        System.out.println("Patient Phone Number: " + object1.phoneNumber);
-
-	    }
-	    catch(IOException ex)
-	    {
-	        System.out.println("IOException is caught");
-	    }
-	    catch(ClassNotFoundException ex)
-	    {
-	        System.out.println("ClassNotFoundException is caught");
-	    }
+//	   
+//	    // Deserialization
+//	    try
+//	    {
+//	        // Reading the object from a file
+//	        FileInputStream file = new FileInputStream("shop.txt");
+//	        ObjectInputStream in = new ObjectInputStream(file);
+//	        // Method for deserialization of object
+//	        invoice object1 = (invoice) in.readObject();
+//	        in.close();
+//	        file.close();
+//	        System.out.println("\nObject has been Deserialized ");
+//	        System.out.println("Pateint First Name: " + object1.firstName);
+//	        System.out.println("Pateint Middle Name: " + object1.middleName);
+//	        System.out.println("Pateint Last Name: " + object1.lastName);
+//	        System.out.println("Patient Phone Number: " + object1.phoneNumber);
+//
+//	    }
+//	    catch(IOException ex)
+//	    {
+//	        System.out.println("IOException is caught");
+//	    }
+//	    catch(ClassNotFoundException ex)
+//	    {
+//	        System.out.println("ClassNotFoundException is caught");
+//	    }
 	
 	
 	}
