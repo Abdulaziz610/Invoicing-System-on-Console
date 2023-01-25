@@ -84,7 +84,7 @@ public class mainMenu {
 	    	  System.out.println("4. Report All Items");
 	    	  System.out.println("5. Go Back");
 	    	  System.out.println("------------------------------------------------------------");
-		      System.out.println("Enter Your Choice: ");
+		      System.out.print("Enter Your Choice: ");
 		      int userOp = sc.nextInt();
 		      System.out.println("------------------------------------------------------------");
 		      
@@ -142,8 +142,9 @@ public class mainMenu {
 
 	        break;
 	      case 4:
+	    	  rreport report1 = new rreport();
 	    	  System.out.println("======= Statistics =======");
-
+	    	  report1.getReport();
 		        break;
 	      case 5:
 	    	  System.out.println("======= All Invoices =======");
@@ -166,10 +167,10 @@ public class mainMenu {
 	    	  }
 		        break;
 
-	    }
+	    	}
 		
 		
-	}
+		}
 	}
 
 
