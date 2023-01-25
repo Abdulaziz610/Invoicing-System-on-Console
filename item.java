@@ -1,13 +1,14 @@
 package invoicingSystem;
 
-public class item {
+import java.io.Serializable;
+
+public class item implements Serializable{
 	
-	private String itemName;
-	
-	private Integer itemId;
-	private Integer quantity;
-	private double unitPrice;
-	private double qtyAmountPerPrice;
+	 String itemName;
+	 Integer itemId;
+	 Integer quantity;
+	 double unitPrice;
+	 double qtyAmountPerPrice;
 	
 	public String getItemName() {
 		return itemName;
@@ -51,19 +52,10 @@ public class item {
 	
 	
 	
+
+
 	
-	public static void outputFormat() {
-		System.out.println("=========================================================");
-		System.out.println("item Name: ");
-		System.out.println("item ID: ");
-		System.out.println("Quantity: ");
-		System.out.println("item Price: ");
-		System.out.println("Quantity Amount/Price: ");
-		
-	}
-	
-	
-	
+ 
 	
 	
 	
