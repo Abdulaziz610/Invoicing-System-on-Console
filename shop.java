@@ -6,8 +6,61 @@ import java.util.List;
 
 public class shop implements Serializable{
 	private String shopName;
+	private String email;
+	private String website;
+	
 	
 	List<item> itemOne = new ArrayList<item>(); 
+	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+	public Integer getFax() {
+		return fax;
+	}
+
+	public void setFax(Integer fax) {
+		this.fax = fax;
+	}
+
+	public Integer getTelNumber() {
+		return telNumber;
+	}
+
+	public void setTelNumber(Integer telNumber) {
+		this.telNumber = telNumber;
+	}
+
+	public List<item> getItemOne() {
+		return itemOne;
+	}
+
+	public void setItemOne(List<item> itemOne) {
+		this.itemOne = itemOne;
+	}
+
+
+	private Integer fax;
+	private Integer telNumber;
+
+	
+	
+	
 		
 	
 	public void addItem(item addItem) {
@@ -16,11 +69,14 @@ public class shop implements Serializable{
 	}
 	
 	public void deleteItem(int deletedItemId) {
-		if(itemOne.size() > 0) {
-			for(item delItem: itemOne) {
-				itemOne.remove(deletedItemId);
-				System.out.println("Deleted Successfully");
+		for (int i = 0; i < itemOne.size(); i++) {
+			item item1 = itemOne.get(i);
+			if (item1.itemId.equals(deletedItemId)) {
+				itemOne.remove(i);
+				System.out.println("Item  has been Deleted ");
+				break;
 			}
+
 		}
 		
 	}
@@ -36,11 +92,11 @@ public class shop implements Serializable{
 	public void reportItem() {
 		for(item reportItem: itemOne) {
 			System.out.println("=========================================================");
-			System.out.printf("item Name: ", reportItem.itemName);
-			System.out.printf("item ID: ", reportItem.itemId);
-			System.out.printf("Quantity: ", reportItem.quantity);
-			System.out.printf("item Price: ", reportItem.unitPrice);
-			System.out.printf("Quantity Amount/Price: ",reportItem.qtyAmountPerPrice);
+			System.out.println("item Name: "+ reportItem.itemName);
+			System.out.println("item ID: "+ reportItem.itemId);
+			System.out.println("Quantity: "+ reportItem.quantity);
+			System.out.println("item Price: "+ reportItem.unitPrice);
+			System.out.println("Quantity Amount/Price: "+reportItem.qtyAmountPerPrice);
 			
 			
 			}
