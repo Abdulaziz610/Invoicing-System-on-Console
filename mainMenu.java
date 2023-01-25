@@ -44,7 +44,7 @@ public class mainMenu {
 		    		 System.out.println("Fax Number: " + shop1.getFax());
 		    		 System.out.println("Email: " + shop1.getEmail());
 		    		 System.out.println("Website: " + shop1.getWebsite());
-		    		 
+		    		 choice1 = true;
 		    	  }
 	    	  if(userOp == 2) {
 	    			System.out.print("Enter shop Name: ");
@@ -68,26 +68,71 @@ public class mainMenu {
 	    	  }
 	    	  else
 	    	  if(userOp == 4) {
-
+	    		  
 	    		  choice1 = false;
 	    			
 	    	  }
-	    	  }
+	   }
 	        break;
 	      case 2:
-	          System.out.println("\n1. Add Items");
+	    	  boolean choice2 = true;
+	    	  while(choice2) {
+	    	  System.out.println("------------------------------------------------------------");
+	          System.out.println("1. Add Items");
 	    	  System.out.println("2. Delete Items");
 	    	  System.out.println("3. Change Item Price");
 	    	  System.out.println("4. Report All Items");
 	    	  System.out.println("5. Go Back");
+	    	  System.out.println("------------------------------------------------------------");
 		      System.out.println("Enter Your Choice: ");
-		      int choice2 = sc.nextInt();
-	    	  if(choice2 == 4) {
-	    		  shop shopOne = new shop();
-	    		  shopOne.reportItem();
+		      int userOp = sc.nextInt();
+		      System.out.println("------------------------------------------------------------");
+		      
+		      
+	    	  if(userOp == 1) {
+					item itemOne = new item();
+					System.out.print("Item Name: ");
+					itemOne.itemName = sc.next();
+					System.out.print("Item ID: ");
+					itemOne.itemId = sc.nextInt();
+					System.out.print("Item Unit Price: ");
+					itemOne.unitPrice = sc.nextDouble();
+					System.out.print("Item Quantity: ");
+					itemOne.quantity = sc.nextInt();
+					System.out.print("Item >> qty amount/price: ");
+					itemOne.qtyAmountPerPrice = sc.nextDouble();
+					//itemX.qtyAmountPrice = itemX.quantity * itemX.unitPrice;
+					shop1.addItem(itemOne);
+				  choice2 = true;
+	    	
 	    	  }
 	    	  
+	    	  if(userOp == 2) {
+					System.out.print("Enter ID of the item to bo deleted: ");
+					Integer deletedItem = sc.nextInt();
+					shop1.deleteItem(deletedItem);
+	    		  choice2 = true;
+	    	  }
+	    	  if(userOp == 3) {
+	    		  System.out.print("Enter ID of the item to change its price: ");
+	    		  Integer itemChangePriceId = sc.nextInt();
+	    		  System.out.println("Enter the New Price of the item: ");
+	    		  Integer itemNewPrice = sc.nextInt();
+	    		  shop1.changePrice(itemChangePriceId, itemNewPrice);
+	    		 choice2 = true;
+	    	  }
+		      
+		      if(userOp == 4) {
+		    	  
+	    		  System.out.println("==================== Report Item ====================");
+	    		  shop1.reportItem();
+	    		 choice2 = true;
+	    	  }
+	    	  if(userOp == 5) {
+	    		 choice1 = false;
+	    	  }
 	    	  
+	   }
 	        break;
 	      case 3:
 	    	  invoice invoice1 = new invoice();
