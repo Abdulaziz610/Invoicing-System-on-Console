@@ -25,12 +25,25 @@ public class shop implements Serializable{
 		
 	}
 	
-	public void changePrice() {
+	public void changePrice(int itemId, double newPrice) {
+		for(item chItem: itemOne) {
+			chItem.unitPrice = newPrice;
+			System.out.println("Price Changed Successfully");
+		}
 		
 	}
 	
 	public void reportItem() {
-		
+		for(item reportItem: itemOne) {
+			System.out.println("=========================================================");
+			System.out.printf("item Name: ", reportItem.itemName);
+			System.out.printf("item ID: ", reportItem.itemId);
+			System.out.printf("Quantity: ", reportItem.quantity);
+			System.out.printf("item Price: ", reportItem.unitPrice);
+			System.out.printf("Quantity Amount/Price: ",reportItem.qtyAmountPerPrice);
+			
+			
+			}
 	}
 
 
