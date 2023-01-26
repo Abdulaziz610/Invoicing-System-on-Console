@@ -7,7 +7,6 @@ public class mainMenu {
 	public static void main(String[] args) {
 		
 		shop shop1 = new shop();
-		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\t\t\t\t\t========================== Welcome ==========================");
 		
@@ -101,7 +100,6 @@ public class mainMenu {
 					itemOne.quantity = sc.nextInt();
 					System.out.print("Item >> qty amount/price: ");
 					itemOne.qtyAmountPerPrice = sc.nextDouble();
-					//itemX.qtyAmountPrice = itemX.quantity * itemX.unitPrice;
 					shop1.addItem(itemOne);
 				  choice2 = true;
 	    	
@@ -129,7 +127,7 @@ public class mainMenu {
 	    		 choice2 = true;
 	    	  }
 	    	  if(userOp == 5) {
-	    		 choice1 = false;
+	    		  choice2 = false;
 	    	  }
 	    	  
 	   }
