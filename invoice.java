@@ -29,14 +29,16 @@ public class invoice implements Serializable{
 	double paidAmount;
 	double balanceAmount;
 	Integer noOfItems = 0;
+	int noOfInvoice = 0;
 	Date InvoiceDate;
-	
+	ArrayList<invoice> invoice1 = new ArrayList<invoice>();
 	public void invoiceHeader() {
 		
 	}
 	public void createNewInvoice() {
-		
+		noOfInvoice++;
 		shop shop1 = new shop();
+		
 		Scanner sc = new Scanner(System.in);
 		
 		invoice invoice1 = new invoice();
@@ -79,47 +81,56 @@ public class invoice implements Serializable{
 
             
         }   
+	
 		while (choice == 'y' || choice == 'Y');  
-		
-		File filePath = new File("C:\\\\Users\\\\Lenovo\\\\eclipse-workspace\\\\invoicingSystem\\\\src\\\\invoicingSystem");
-		File[] inFiles = filePath.listFiles();
-
-		if (inFiles.length > 0) {
-			for (File f : inFiles) {
-				if (f.getName().endsWith(".txt")) {
-					textFileCounter++;
-				}
+	}
+		public void report() {
+			for(invoice invArr : invoice1) {
+				System.out.println("========== Invoice Details ==========");
+				System.out.println("Customer First Name: " + invArr.firstName);
+				System.out.println("Customer Middle Name: " + invArr.middleName);
+				System.out.println("Customer Last Name: " + invArr.lastName);
+				System.out.println("Customer Number: " + invArr.phoneNumber);
+				System.out.println("Customer number of items: " + invArr.noOfItem);
+				System.out.println("Customer Total Amount: " + invArr.totalAmount);
+				System.out.println("Customer Paid Amount: " + invArr.paidAmount);
+				System.out.println("Customer Name: " + (invArr.balanceAmount));
 			}
 		}
-
-		// --------------------------------------------------
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		File fileStatistics = new File("C:\\Users\\Lenovo\\eclipse-workspace\\invoicingSystem\\src\\invoicingSystem\\Report.txt");
-		File fileAllReport = new File("C:\\Users\\Lenovo\\eclipse-workspace\\invoicingSystem\\InvoiceFolder"+ invoiceId + ".txt");
-		try {
-			FileWriter fWrite = new FileWriter(fileStatistics);
-			fWrite.write("No Of Items: " + noOfItems);
-			fWrite.write("No of Invoices: " + textFileCounter);
-			fWrite.write("Total Sales: " + totalAmount);
-			fWrite.close();
-			FileWriter fw = new FileWriter(fileAllReport);
-			Date InvoiceDate = new Date(invoiceDate);
-			fw.write("Invoice No: " + textFileCounter);
-			fw.write("Invoice Date: " + dateFormat.format(InvoiceDate));
-			fw.write("Customer First Name: " + firstName);
-			fw.write("Customer Middle Name: " + middleName);
-			fw.write("Customer Last Name: " + lastName);
-			fw.write("No Of Items: " + noOfItems);
-			fw.write("Total: " + totalAmount);
-			//fw.write("Balance: " + balanceAmount);
-			fw.close();
-			
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		public void reportAll() {
+			System.out.println("========== All Invoice Details ==========");
+			for(invoice invArr : invoice1) {
+				System.out.println("========== Invoice Details ==========");
+				System.out.println("Customer First Name: " + invArr.firstName);
+				System.out.println("Customer Middle Name: " + invArr.middleName);
+				System.out.println("Customer Last Name: " + invArr.lastName);
+				System.out.println("Customer Number: " + invArr.phoneNumber);
+				System.out.println("Customer number of items: " + invArr.noOfItem);
+				System.out.println("Customer Total Amount: " + invArr.totalAmount);
+				System.out.println("Customer Paid Amount: " + invArr.paidAmount);
+				System.out.println("Customer Name: " +(invArr.balanceAmount));
+			}
 		}
-	
+		public void search(int invoiceNo) {
+			if(invoice1.size() > 0) {
+				for(int i = 0 ; i < invoice1.size(); i++) {
+					if(invoiceNo == invoice1.get(i).invoiceId ) {
+						System.out.println("-------------Invoice Detail-------------");
+						System.out.println("Invoice number : " + invoice1.get(i).invoiceId);
+						System.out.println("Customer First Name: " + invoice1.get(i).firstName  );
+						System.out.println("Customer Middle Name: " + invoice1.get(i).middleName);
+						System.out.println("Customer Last Name: " + invoice1.get(i).lastName);
+						System.out.println("Customer Number: " + invoice1.get(i).phoneNumber);
+						System.out.println("Customer number of items: " + invoice1.get(i).noOfItems);
+						System.out.println("Customer Total Amount: " + invoice1.get(i).totalAmount);
+						System.out.println("Customer Paid Amount: " + invoice1.get(i).paidAmount);
+						System.out.println("Customer Balance Amount: " + invoice1.get(i).balanceAmount);
+				}
+				
+			}
+			
+		
+			}
 
 	   
 	   
