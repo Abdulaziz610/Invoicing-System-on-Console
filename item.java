@@ -9,6 +9,7 @@ public class item implements Serializable{
 	 Integer quantity;
 	 double unitPrice;
 	 double qtyAmountPerPrice;
+	 Integer noOfItems;
 	
 	public String getItemName() {
 		return itemName;

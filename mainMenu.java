@@ -7,6 +7,7 @@ public class mainMenu {
 	public static void main(String[] args) {
 		
 		shop shop1 = new shop();
+		invoice invoice1 = new invoice();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\t\t\t\t\t========================== Welcome ==========================");
 		
@@ -133,25 +134,29 @@ public class mainMenu {
 	   }
 	        break;
 	      case 3:
-	    	  invoice invoice1 = new invoice();
+	    	  
 	    	  System.out.println("======= New Invoice =======");
 	    	  invoice1.createNewInvoice();
 	    	  choice = true;
 
 	        break;
 	      case 4:
-	    	  rreport report1 = new rreport();
+	    	  
 	    	  System.out.println("======= Statistics =======");
-	    	  report1.getReport();
+	    	  invoice1.report();
+	    	  
 		        break;
 	      case 5:
 	    	  System.out.println("======= All Invoices =======");
+	    	  invoice1.reportAll();
 
 		        break;
 	      case 6:
 	    	  System.out.println("======= Search (1) Invoice =======");
-
-		        break;
+	    	  System.out.println("Enter an item to be searched: ");
+	    	  Integer searchedItem = sc.nextInt();
+	    	  invoice1.search(searchedItem);
+	    	  break;
 	      case 7:
 	    	  System.out.println("======= Program Statistics =======");
 

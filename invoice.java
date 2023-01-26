@@ -28,7 +28,7 @@ public class invoice implements Serializable{
 	double totalAmount;
 	double paidAmount;
 	double balanceAmount;
-	Integer noOfItems = 0;
+	Integer noOfItems;
 	int noOfInvoice = 0;
 	Date InvoiceDate;
 	ArrayList<invoice> invoice1 = new ArrayList<invoice>();
@@ -41,15 +41,22 @@ public class invoice implements Serializable{
 		
 		Scanner sc = new Scanner(System.in);
 		
-		invoice invoice1 = new invoice();
-		System.out.println("Enter the Customer First Name: ");
-		invoice1.firstName = sc.next();
-		System.out.println("Enter the Customer Middle Name: ");
-		invoice1.middleName = sc.next();
-		System.out.println("Enter the Customer Last Name: ");
-		invoice1.lastName = sc.next();
-		System.out.println("Enter the Customer phone Number: ");
-		invoice1.phoneNumber = sc.nextInt();
+		invoice invoice2 = new invoice();
+		System.out.print("Enter the Customer First Name: ");
+		invoice2.firstName = sc.next();
+		System.out.print("Enter the Customer Middle Name: ");
+		invoice2.middleName = sc.next();
+		System.out.print("Enter the Customer Last Name: ");
+		invoice2.lastName = sc.next();
+		System.out.print("Enter the Customer phone Number: ");
+		invoice2.phoneNumber = sc.nextInt();
+		System.out.print("Enter Number Of Items: ");
+		invoice2.noOfItems = sc.nextInt();
+		System.out.print("Enter Total Amount: ");
+		invoice2.totalAmount = sc.nextDouble();
+		System.out.print("Enter Paid Amount: ");
+		invoice2.paidAmount = sc.nextDouble();
+		invoice2.balanceAmount = invoice2.totalAmount - invoice2.paidAmount;
 		
 		
 		char choice;
@@ -72,18 +79,23 @@ public class invoice implements Serializable{
             System.out.print("Item Price per unit: ");  
             item1.setQtyAmountPerPrice(sc.nextInt()); 
 
-            
+            item1.setQtyAmountPerPrice(item1.unitPrice * item1.quantity);
+			System.out.println("quantity Price : " + item1.getQtyAmountPerPrice());
        
             System.out.print("\nDo You Want To Add More Items? \nPress Y if yes, and N for No: ");  
 
             choice = sc.next().charAt(0);  
 
-
+           
             
         }   
 	
 		while (choice == 'y' || choice == 'Y');  
+		invoice1.add(invoice2);
+		
 	}
+	
+	
 		public void report() {
 			for(invoice invArr : invoice1) {
 				System.out.println("========== Invoice Details ==========");
@@ -91,10 +103,10 @@ public class invoice implements Serializable{
 				System.out.println("Customer Middle Name: " + invArr.middleName);
 				System.out.println("Customer Last Name: " + invArr.lastName);
 				System.out.println("Customer Number: " + invArr.phoneNumber);
-				System.out.println("Customer number of items: " + invArr.noOfItem);
+				System.out.println("Customer Number of items: " + invoice1.size());
 				System.out.println("Customer Total Amount: " + invArr.totalAmount);
 				System.out.println("Customer Paid Amount: " + invArr.paidAmount);
-				System.out.println("Customer Name: " + (invArr.balanceAmount));
+				System.out.println("Customer BalanceAmount: " + (invArr.balanceAmount));
 			}
 		}
 		public void reportAll() {
@@ -105,10 +117,10 @@ public class invoice implements Serializable{
 				System.out.println("Customer Middle Name: " + invArr.middleName);
 				System.out.println("Customer Last Name: " + invArr.lastName);
 				System.out.println("Customer Number: " + invArr.phoneNumber);
-				System.out.println("Customer number of items: " + invArr.noOfItem);
+				System.out.println("Customer Number of items: " + invoice1.size());
 				System.out.println("Customer Total Amount: " + invArr.totalAmount);
 				System.out.println("Customer Paid Amount: " + invArr.paidAmount);
-				System.out.println("Customer Name: " +(invArr.balanceAmount));
+				System.out.println("Customer BalanceAmount: " +(invArr.balanceAmount));
 			}
 		}
 		public void search(int invoiceNo) {

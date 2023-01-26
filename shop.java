@@ -77,6 +77,7 @@ public class shop implements Serializable{
 				break;
 			}
 
+			
 		}
 		
 	}
