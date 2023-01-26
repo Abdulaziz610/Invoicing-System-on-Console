@@ -1,11 +1,15 @@
 package invoicingSystem;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,35 +21,23 @@ public class invoice implements Serializable{
 	String middleName;
 	String lastName;
 	Integer phoneNumber;
-	
 	Integer invoiceDate;
 	Integer noOfItem;
-	
+	Integer textFileCounter;
+	Integer invoiceId;
 	double totalAmount;
 	double paidAmount;
 	double balanceAmount;
+	Integer noOfItems = 0;
+	Date InvoiceDate;
 	
-
-
 	public void invoiceHeader() {
 		
-        System.out.println("--------------------Invoice Header -----------------");  
-        System.out.println("\t\t\t\t\tTel: 99999999");  
-        System.out.println("\t\t\t\t\tFax: 24524528"); 
-        System.out.println("\t\t\t\t\tEmail: grocerystore@grocerystore.com");  
-        System.out.println("\t\t\t\t\tWebsite: www.grocerystore.com");  
-        
-		 
-	
 	}
 	public void createNewInvoice() {
 		
 		shop shop1 = new shop();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter shop Name: ");
-		shop1.setShopName(sc.next());
-		
-		
 		
 		invoice invoice1 = new invoice();
 		System.out.println("Enter the Customer First Name: ");
@@ -63,7 +55,7 @@ public class invoice implements Serializable{
 		do   
         {  
 			item item1 = new item();
- 
+
             System.out.println("=============== Enter Product Details ===============");  
             System.out.print("Item Id: ");  
             item1.setItemId(sc.nextInt());
@@ -89,48 +81,49 @@ public class invoice implements Serializable{
         }   
 		while (choice == 'y' || choice == 'Y');  
 		
-		
+		File filePath = new File("C:\\\\Users\\\\Lenovo\\\\eclipse-workspace\\\\invoicingSystem\\\\src\\\\invoicingSystem");
+		File[] inFiles = filePath.listFiles();
+
+		if (inFiles.length > 0) {
+			for (File f : inFiles) {
+				if (f.getName().endsWith(".txt")) {
+					textFileCounter++;
+				}
+			}
+		}
+
+		// --------------------------------------------------
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		File fileStatistics = new File("C:\\Users\\Lenovo\\eclipse-workspace\\invoicingSystem\\src\\invoicingSystem\\Report.txt");
+		File fileAllReport = new File("C:\\Users\\Lenovo\\eclipse-workspace\\invoicingSystem\\InvoiceFolder"+ invoiceId + ".txt");
+		try {
+			FileWriter fWrite = new FileWriter(fileStatistics);
+			fWrite.write("No Of Items: " + noOfItems);
+			fWrite.write("No of Invoices: " + textFileCounter);
+			fWrite.write("Total Sales: " + totalAmount);
+			fWrite.close();
+			FileWriter fw = new FileWriter(fileAllReport);
+			Date InvoiceDate = new Date(invoiceDate);
+			fw.write("Invoice No: " + textFileCounter);
+			fw.write("Invoice Date: " + dateFormat.format(InvoiceDate));
+			fw.write("Customer First Name: " + firstName);
+			fw.write("Customer Middle Name: " + middleName);
+			fw.write("Customer Last Name: " + lastName);
+			fw.write("No Of Items: " + noOfItems);
+			fw.write("Total: " + totalAmount);
+			//fw.write("Balance: " + balanceAmount);
+			fw.close();
+			
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
-	try{
-	       FileOutputStream file = new FileOutputStream("shop.txt");
-	       ObjectOutputStream out = new ObjectOutputStream(file);
-	       out.writeObject(shop1);
-	       out.close();
-	       file.close();
-	       System.out.println("Serialized and saved");
-	   }catch (Exception e){
-		   System.out.println("Error: Cannot be Saved!");
-	     e.printStackTrace();
-	   }
-	//--------------------------------------------------------
+
 	   
 	   
-//	   
-//	    // Deserialization
-//	    try
-//	    {
-//	        // Reading the object from a file
-//	        FileInputStream file = new FileInputStream("shop.txt");
-//	        ObjectInputStream in = new ObjectInputStream(file);
-//	        // Method for deserialization of object
-//	        invoice object1 = (invoice) in.readObject();
-//	        in.close();
-//	        file.close();
-//	        System.out.println("\nObject has been Deserialized ");
-//	        System.out.println("Pateint First Name: " + object1.firstName);
-//	        System.out.println("Pateint Middle Name: " + object1.middleName);
-//	        System.out.println("Pateint Last Name: " + object1.lastName);
-//	        System.out.println("Patient Phone Number: " + object1.phoneNumber);
-//
-//	    }
-//	    catch(IOException ex)
-//	    {
-//	        System.out.println("IOException is caught");
-//	    }
-//	    catch(ClassNotFoundException ex)
-//	    {
-//	        System.out.println("ClassNotFoundException is caught");
-//	    }
+
 	
 	
 	}
